@@ -15,7 +15,7 @@
 /*file con define e struct*/
 #include "./thread.h"
 
-
+#include "./function.c"
 
 /*#define DEBUG*/
 
@@ -42,8 +42,8 @@ char mac_addr[NUMSTA+NUMAP][6]; /*matrice di indirizzi mac*/
 * lenght != 0
 * mit, dest != NULL
 */
-frame* MC_packet(char* payload, char* dest, int lenght, int type_FLAG);
 
+frame* MC_packet(char* payload, char* dest, int length, int type_FLAG);
 
 void check_for_recv_send( Stato *pS ) {
 
@@ -158,6 +158,7 @@ void mac_addr_initialize() {
 
 int findIndex(int ind) {
 	int i;
+	/*IF IND MINORE DI 100? - immagino fosse debugging*/
 	if (ind < 100) { /*sincronizzazione iniziale*/ /*TODO: modificare flag per la find*/
 		printf("APP %d CHIEDE MUTEX\n", ind);
 		pthread_mutex_lock(&mutexdata);
@@ -187,7 +188,7 @@ int findIndex(int ind) {
 }
 
 /*FUNZIONI PRINCIPALI*/
-int Send(char* macDest, char* buffer	, int length, int i){
+int Send(char* macDest, char* buffer, int length, int i){
 	int index = findIndex(i);
 	unsigned long int sp = TABLE[index].app->spfd;
 	printf(BLU "PRIMA DELLA sEND" DEFAULTCOLOR);
