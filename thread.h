@@ -22,6 +22,8 @@
 #define BLU "\033[0;0;34m"
 #define ORANGE "\033[0;0;33m"
 
+#define ACK_FLAG 212
+
 typedef struct { 
 	char buf[MAXSIZE];
 	int first;
